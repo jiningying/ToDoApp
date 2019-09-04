@@ -67,7 +67,7 @@ app.post("/newCustomer", function(req, res) {
   console.log(req.body);
   // db.push(req.body);
 
-  db.collection('fit2095db').insertOne({ taskName: req.body.firstName, assignTo: req.body.person, dueDate: req.body.lastName, taskStatus: req.body.status, taskDesc: req.body.email});
+  db.collection('fit2095db').insertOne({ taskName: req.body.firstName, assignTo: req.body.person, dueDate: new Date (req.body.lastName), taskStatus: req.body.status, taskDesc: req.body.email});
 
   // res.render("allcustomers", { customers: db });
   res.redirect('/getAllCustomers'); // redirect the client to list users page
@@ -134,5 +134,22 @@ app.get('/deleteAll', function(req, res) {
   res.redirect('/getAllCustomers'); // redirect the client to list users page
 });
 
+
+//GET request: send the page to the client to enter the user's name
+app.get('/deleteDate', function (req, res) {
+  res.sendFile(__dirname + '/views/deleteDatecustomer.html');
+});
+
+//POST request: receive the user's name and do the delete operation
+app.post('/deleteDatecustomer', function (req, res) {
+  let userDetails = req.body;
+  // let filter = {dueDate: Date(userDetails.deleteDateID)};
+
+  let filter = {dueDate: {"$gte":new Date(userDetails.deleteDateID)}};
+
+  db.collection('fit2095db').deleteMany(filter);
+  res.redirect('/getAllCustomers');// redirect the client to list users page
+
+});
 
 app.listen(8080);
