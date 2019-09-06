@@ -83,15 +83,15 @@
 <body>
 
 </br>
-<h3>The tasks are:
+<h3>Developers are as follows:
     <table>
         <tr>
-            <td>Task ID</td>
-            <td>Task name</td>
-            <td>Assign to</td>
-            <td>Due Date</td>
-            <td>Task status</td>
-            <td>Description</td>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Level</td>
+            <td>Address</td>
+<!--            <td>Task status</td>-->
+<!--            <td>Description</td>-->
         </tr>
 
         <% for ( var i =0; i< customers.length;i++){ %>
@@ -100,20 +100,25 @@
                 <%= customers[i]._id %>
             </td>
             <td>
-                <%= customers[i].taskName %>
+                <%= customers[i].name.firstName%>
+                <%= customers[i].name.lastName%>
+            </td>
+
+            <td>
+                <%= customers[i].level %>
             </td>
             <td>
-                <%= customers[i].assignTo %>
+                <%= customers[i].address.unit %>
+                <%= customers[i].address.street %>
+                <%= customers[i].address.suburb %>
+                <%= customers[i].address.state %>
             </td>
-            <td>
-                <%= customers[i].dueDate %>
-            </td>
-            <td>
-                <%= customers[i].taskStatus %>
-            </td>
-            <td>
-                <%= customers[i].taskDesc %>
-            </td>
+<!--            <td>-->
+<!--                <%= customers[i].taskStatus %>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <%= customers[i].taskDesc %>-->
+<!--            </td>-->
         </tr>
         <% }%>
     </table>
